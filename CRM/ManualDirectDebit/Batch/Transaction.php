@@ -283,6 +283,10 @@ class CRM_ManualDirectDebit_Batch_Transaction {
         $returnValues['receive_date'] = 'DATE_FORMAT(civicrm_contribution.receive_date, "%d-%m-%Y") as receive_date';
       }
     }
+    // id is required for order by with distinct
+    if (!isset($returnValues['id'])) {
+      $returnValues['id'] = $this->params['entityTable'] . '.id as id';
+    }
 
     $this->returnValues = $returnValues;
 
